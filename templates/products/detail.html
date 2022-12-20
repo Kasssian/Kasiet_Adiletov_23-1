@@ -1,0 +1,35 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    <style type="text/css">
+        .product {
+            width: 55%;
+            margin-left: 20%;
+        }
+        .reviews {
+            margin-top: 30px;
+        }
+        .reviews-block {
+            height: max-content;
+            padding: 10px;
+            border: 1px solid #242b2e;
+        }
+    </style>
+    <div class="product">
+        <img src="{{ product.image.url }}" alt="" width="1000">
+        <h3 class="card-title">{{ product.title }}</h3>
+        <h4 class="card-price">Цена: {{ product.price }}</h4>
+        <h4 class="card-quantity">Количество: {{ product.quantity }}</h4>
+        <h6 class="cart-dis">{{ product.description }}</h6>
+        <div class="reviews-block">
+            <div class="reviews">
+                {% for review in reviews %}
+                    <h4>Покупатель:{{ review.customer }}</h4>
+                    <p>Отзыв:</p>
+                    <p>{{ review.text }}</p>
+                    <p>Дата написания: {{ review.creat_date }}</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,4 +1,5 @@
 {% extends 'layouts/index.html' %}
+
 {% block content %}
     {% for product in products %}
         <style>
@@ -9,15 +10,17 @@
                 margin-left: 20%;
             }
         </style>
-        <div class="card" style="width: 64.5rem;">
-            <div class="card-body">
-                <img src="{{ product.image.url }}" alt="" width="1000">
-                <h3 class="card-title">{{ product.title }}</h3>
-                <h4 class="card-price">Цена: {{ product.price }}</h4>
-                <h4 class="card-quantity">Количество: {{ product.quantity }}</h4>
-                <h6 class="cart-dis">{{ product.description }}</h6>
-                <a href="#" class="card-link"></a>
-            </div>
+        <div class="one-product">
+                <div class="card" style="width: 64.5rem;">
+                <div class="card-body">
+                    <img src="{{ product.image.url }}" alt="" width="1000">
+                    <h3 class="card-title">{{ product.title }}</h3>
+                    <h4 class="card-price">Цена: {{ product.price }}</h4>
+                    <h4 class="card-quantity">Количество: {{ product.quantity }}</h4>
+                    <h6 class="cart-dis">{{ product.description }}</h6>
+                    <a href="/products/{{ product.id }}/" class="card-link">Отзывы</a>
+                </div>
+                </div>
         </div>
     {% endfor %}
 {% endblock %}
