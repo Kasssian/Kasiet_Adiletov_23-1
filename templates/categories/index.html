@@ -1,0 +1,14 @@
+{% extends 'layouts/index.html' %}
+
+{% block content %}
+    {% for category in categories %}
+        <div class="category">
+            <div class="card">
+                <div class="card-body" style="width: 15rem;">
+                    <img src="{{ category.image.url }}" alt="нет" style="width: 50px;">
+                    <a href="/products/?category_id={{ category.id }}" class="card-link">{{ category.title }}</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

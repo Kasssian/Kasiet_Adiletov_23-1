@@ -1,5 +1,5 @@
 from datetime import datetime
-from product.models import Product, Review
+from product.models import Product, Category
 from django.shortcuts import HttpResponse, render
 
 
@@ -21,7 +21,11 @@ def rend(request):
 
 def products_view(request):
     if request.method == 'GET':
-        products = Product.objects.all()
+        category_id = request.GET.get('category_id')
+        if category_id:
+            products = Product.objects.filter(category_id=category_id)
+        else:
+            products = Product.objects.all()
         return render(request, 'products/product.html', context={
             'products': products
         })
@@ -32,5 +36,14 @@ def products_detail_view(request, id):
         product = Product.objects.get(id=id)
         return render(request, 'products/detail.html', context={
             'product': product,
-            'reviews': product.reviews.all()
+            'reviews': product.reviews.all(),
+            'categories': product.category
+        })
+
+
+def categories_list_view(request):
+    if request.method == "GET":
+        categories = Category.objects.all()
+        return render(request, 'categories/index.html', context={
+            'categories': categories
         })

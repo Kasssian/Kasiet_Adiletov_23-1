@@ -15,17 +15,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import hello, now_date, good_bay, rend, products_view, products_detail_view
+from product.views import hello, now_date, good_bay, rend, products_view, products_detail_view, categories_list_view
 from django.conf.urls.static import static
 from . import settings
 
-
 urlpatterns = [
-    path('hello/', hello),
-    path('admin/', admin.site.urls),
-    path('good_bay/', good_bay),
-    path('now_date/', now_date),
-    path('', rend),
-    path('products/', products_view),
-    path('products/<int:id>/', products_detail_view)
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                  path('hello/', hello),
+                  path('admin/', admin.site.urls),
+                  path('good_bay/', good_bay),
+                  path('now_date/', now_date),
+                  path('', rend),
+                  path('products/', products_view),
+                  path('products/<int:id>/', products_detail_view),
+                  path('categories/', categories_list_view),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
