@@ -1,0 +1,23 @@
+{% extends 'layouts/index.html' %}
+
+
+{% block content %}
+    <div class="form-box" style="margin-left: 37%; margin-top: 10ex">
+        <div class="form">
+            <form action="/products/create/" method="post">
+                {% csrf_token %}
+                <p>Изображение продукта: </p>
+                <p>{{ form.image }}</p>
+                <p>Название продукта: {{ form.title }}</p>
+                <p>Стоимость продукта: {{ form.price }}</p>
+                <p>Количество продукта: {{ form.quantity }}</p>
+                <p>Дата создания продукта: {{ form.creat_date }}</p>
+                <p>Описание продукта: </p>
+                <p>{{ form.description }}</p>
+                <p>Категория продукта: </p>
+                <p>{{ form.category }}</p>
+                <input type="submit" value="Создать">
+            </form>
+        </div>
+    </div>
+{% endblock %}

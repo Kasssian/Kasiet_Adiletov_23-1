@@ -1,6 +1,7 @@
 from datetime import datetime
-from product.models import Product, Category
-from django.shortcuts import HttpResponse, render
+from product.models import Product, Category, Review
+from django.shortcuts import HttpResponse, render, redirect
+from product.forms import ProductCreateForm, ReviewCreateForm
 
 
 def hello(request):
@@ -37,8 +38,27 @@ def products_detail_view(request, id):
         return render(request, 'products/detail.html', context={
             'product': product,
             'reviews': product.reviews.all(),
-            'categories': product.category
+            'categories': product.category,
+            'review_form': ReviewCreateForm,
         })
+    if request.method == "POST":
+        product = Product.objects.get(id=id)
+        form = ReviewCreateForm(data=request.POST)
+
+        if form.is_valid():
+            Review.objects.create(
+                product_id=id,
+                customer=form.cleaned_data.get('customer'),
+                text=form.cleaned_data.get('text'),
+            )
+            return redirect(f'/products/{id}/')
+        else:
+            return render(request, 'products/detail.html', context={
+                'product': product,
+                'reviews': product.reviews.all(),
+                'categories': product.category,
+                'review_form': form,
+            })
 
 
 def categories_list_view(request):
@@ -47,3 +67,33 @@ def categories_list_view(request):
         return render(request, 'categories/index.html', context={
             'categories': categories
         })
+
+
+def product_create_view(request):
+    if request.method == "GET":
+        return render(request, 'products/create_product.html', context={
+            'form': ProductCreateForm
+        })
+
+    if request.method == 'POST':
+        form = ProductCreateForm(data=request.POST, files=request.FILES)
+        if form.is_valid():
+            print('valid')
+            Product.objects.create(
+                image=request.POST.get('image'),
+                title=request.POST.get('title'),
+                price=request.POST.get('price'),
+                quantity=request.POST.get('quantity'),
+                creat_date=request.POST.get('creat_date'),
+                description=request.POST.get('description'),
+            )
+            Category.objects.get(
+                category=request.POST.get('category'),
+            )
+            return redirect('/products/')
+        else:
+            print('not valid')
+            print(form.errors)
+            return render(request, 'products/create_product.html', context={
+                'form': form
+            })
