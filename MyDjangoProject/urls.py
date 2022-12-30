@@ -18,6 +18,7 @@ from django.urls import path
 from product.views import hello, now_date, good_bay, rend, products_view, products_detail_view, categories_list_view, \
     product_create_view
 from django.conf.urls.static import static
+from users.views import login_view, logout_view, register_view
 from . import settings
 
 urlpatterns = [
@@ -30,4 +31,7 @@ urlpatterns = [
                   path('products/<int:id>/', products_detail_view),
                   path('categories/', categories_list_view),
                   path('products/create/', product_create_view),
+                  path('users/login/', login_view),
+                  path('users/logout/', logout_view),
+                  path('users/register/', register_view),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

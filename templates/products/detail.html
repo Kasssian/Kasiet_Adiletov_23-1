@@ -50,7 +50,7 @@
         <div class="reviews-block">
             <div class="reviews">
                 {% for review in reviews %}
-                    <h4>Покупатель:{{ review.customer }}</h4>
+                    <h4>Покупатель:{{ review.author }}</h4>
                     <p>Отзыв:</p>
                     <p>{{ review.text }}</p>
                     <p>Дата написания: {{ review.creat_date }}</p>

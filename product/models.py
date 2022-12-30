@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -15,6 +16,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(blank=True, verbose_name="Изображение")
     title = models.CharField(max_length=100, verbose_name="Название")
     price = models.FloatField(verbose_name="Цена")
@@ -32,13 +34,13 @@ class Product(models.Model):
 
 
 class Review(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name="reviews")
-    customer = models.CharField(max_length=50, verbose_name="Покупатель", default="Аноним")
     text = models.TextField(verbose_name="Отзыв")
     creat_date = models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.customer
+        return self.author
 
     class Meta:
         verbose_name = "Отзыв"
