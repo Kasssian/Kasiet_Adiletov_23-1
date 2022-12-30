@@ -6,8 +6,6 @@
         <div class="form">
             <form action="/products/create/" method="post">
                 {% csrf_token %}
-                <p>Изображение продукта: </p>
-                <p>{{ form.image }}</p>
                 <p>Название продукта: {{ form.title }}</p>
                 <p>Стоимость продукта: {{ form.price }}</p>
                 <p>Количество продукта: {{ form.quantity }}</p>

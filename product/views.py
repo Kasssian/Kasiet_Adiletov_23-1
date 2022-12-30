@@ -12,12 +12,19 @@ def good_bay(request):
     return HttpResponse(f'Good bay {request.user}!')
 
 
+def check_user(request):
+    return None if request.user.is_anonymous else request.user
+
+
 def now_date(request):
     return HttpResponse(datetime.now().date())
 
 
 def rend(request):
-    return render(request, 'layouts/index.html')
+    if request.method == "GET":
+        return render(request, 'layouts/index.html', context={
+            "user": check_user(request)
+        })
 
 
 def products_view(request):
@@ -66,7 +73,8 @@ def categories_list_view(request):
     if request.method == "GET":
         categories = Category.objects.all()
         return render(request, 'categories/index.html', context={
-            'categories': categories
+            'categories': categories,
+            "user": check_user(request)
         })
 
 
@@ -82,7 +90,6 @@ def product_create_view(request):
             print('valid')
             Product.objects.create(
                 author=request.user,
-                image=request.POST.get('image'),
                 title=request.POST.get('title'),
                 price=request.POST.get('price'),
                 quantity=request.POST.get('quantity'),

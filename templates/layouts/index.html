@@ -28,17 +28,18 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="/">Главная</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/products/">Товары</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/categories/">Категории</a>
-                </li>
+
                 {% if user %}
                     <li class="nav-item">
                         <a class="nav-link" href="/products/create/">Создание товара</a>
                     </li>
-                    <li class="nav-item" style="margin-left: 140ex">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/products/">Товары</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/categories/">Категории</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/users/logout/">Выйти</a>
                     </li>
                 {% else %}

@@ -22,8 +22,8 @@ def login_view(request):
                 password=form.cleaned_data.get('password'),
             )
             if user:
-                login(request, user=user)
-                redirect('/products/')
+                login(request, user)
+                return redirect('/products/')
             else:
                 form.add_error('username', 'Не правильно введён пароль или логин.')
         return render(request, 'users/login.html', context={
