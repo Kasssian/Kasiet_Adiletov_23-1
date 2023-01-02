@@ -19,7 +19,7 @@
             background: darkgrey;
         }
 
-        .now-review-block{
+        .now-review-block {
             margin-top: 10px;
             margin-bottom: 10px;
             height: max-content;
@@ -43,8 +43,10 @@
         <div class="now-review-block">
             <form action="/products/{{ product.id }}/" method="post">
                 {% csrf_token %}
-                {{ review_form.as_p }}
-                <input type="submit" value="Создать">
+                {% if user %}
+                    {{ review_form.as_p }}
+                    <input type="submit" value="Создать">
+                {% endif %}
             </form>
         </div>
         <div class="reviews-block">

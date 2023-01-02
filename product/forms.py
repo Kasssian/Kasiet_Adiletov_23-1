@@ -5,6 +5,7 @@ CATEGORY_CHOICES = ((category.title, category) for category in Category.objects.
 
 
 class ProductCreateForm(forms.Form):
+    image = forms.FileField()
     title = forms.CharField(max_length=100)
     price = forms.IntegerField(min_value=0)
     quantity = forms.IntegerField(min_value=0)
