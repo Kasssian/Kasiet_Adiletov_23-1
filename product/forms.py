@@ -15,5 +15,4 @@ class ProductCreateForm(forms.Form):
 
 
 class ReviewCreateForm(forms.Form):
-    customer = forms.CharField(max_length=50, label='Написать имя: ')
     text = forms.CharField(min_length=0, label='Написать комментарий: ')

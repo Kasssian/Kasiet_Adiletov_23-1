@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-# Create your models here.
 class Category(models.Model):
     image = models.ImageField(null=True, verbose_name="Иконка")
     title = models.CharField(max_length=30, verbose_name="Название категории")

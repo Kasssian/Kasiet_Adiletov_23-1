@@ -12,7 +12,7 @@
             .card {
                 display: flex;
                 justify-content: center;
-                margin-bottom: 10px;
+                margin-top: 10px;
                 width: 80%;
                 margin-left: 20%;
             }
@@ -32,9 +32,11 @@
             </div>
         </div>
     {% endfor %}
-    <div class="pages" style="display: flex;justify-content: center">
-    {% for page in max_page %}
-        <a href="/products/?page={{ page }}"><button>{{ page }}</button></a>
-    {% endfor %}
+    <div class="pages" style="display: flex;justify-content: center;margin-top: 10px;margin-bottom: 10px">
+        {% for page in max_page %}
+            <a href="/products/?page={{ page }}">
+                <button>{{ page }}</button>
+            </a>
+        {% endfor %}
     </div>
 {% endblock %}

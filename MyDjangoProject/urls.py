@@ -15,23 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from product.views import hello, now_date, good_bay, rend, products_view, products_detail_view, categories_list_view, \
-    product_create_view
+from product.views import rend, ProductCreateCBV, \
+    ProductsCBV, CategoriesCBV, ProductsDetailCBV
 from django.conf.urls.static import static
-from users.views import login_view, logout_view, register_view
+from users.views import LoginCBV, LogoutCBV, RegisterCBV
 from . import settings
 
 urlpatterns = [
-                  path('hello/', hello),
                   path('admin/', admin.site.urls),
-                  path('good_bay/', good_bay),
-                  path('now_date/', now_date),
                   path('', rend),
-                  path('products/', products_view),
-                  path('products/<int:id>/', products_detail_view),
-                  path('categories/', categories_list_view),
-                  path('products/create/', product_create_view),
-                  path('users/login/', login_view),
-                  path('users/logout/', logout_view),
-                  path('users/register/', register_view),
+                  path('products/', ProductsCBV.as_view()),
+                  path('products/<int:pk>/', ProductsDetailCBV.as_view()),
+                  path('categories/', CategoriesCBV.as_view()),
+                  path('products/create/', ProductCreateCBV.as_view()),
+                  path('users/login/', LoginCBV.as_view()),
+                  path('users/logout/', LogoutCBV.as_view()),
+                  path('users/register/', RegisterCBV.as_view()),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
